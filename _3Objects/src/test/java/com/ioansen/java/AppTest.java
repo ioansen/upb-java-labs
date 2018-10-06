@@ -1,4 +1,4 @@
-package com.ioansen.java.labs;
+package com.ioansen.java;
 
 import static org.junit.Assert.assertTrue;
 

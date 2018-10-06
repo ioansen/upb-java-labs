@@ -1,4 +1,4 @@
-package com.ioansen.java.labs.util;
+package com.ioansen.java.util;
 
 import com.sun.tools.javac.jvm.Gen;
 

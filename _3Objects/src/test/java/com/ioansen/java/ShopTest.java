@@ -1,8 +1,8 @@
-package com.ioansen.java.labs;
+package com.ioansen.java;
 
-import com.ioansen.java.labs.ShopEx.Product;
-import com.ioansen.java.labs.ShopEx.Shop;
-import com.ioansen.java.labs.util.Generator;
+import com.ioansen.java.ShopEx.Product;
+import com.ioansen.java.ShopEx.Shop;
+import com.ioansen.java.util.Generator;
 import org.junit.Test;
 
 import java.util.List;

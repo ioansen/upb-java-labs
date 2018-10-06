@@ -1,4 +1,4 @@
-package com.ioansen.java.labs.ShopEx;
+package com.ioansen.java.ShopEx;
 
 public class Product {
 

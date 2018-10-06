@@ -1,4 +1,4 @@
-package com.ioansen.java.labs.ShopEx;
+package com.ioansen.java.ShopEx;
 
 import java.util.ArrayList;
 import java.util.Collections;
