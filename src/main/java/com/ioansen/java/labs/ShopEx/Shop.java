@@ -1,7 +1,9 @@
 package com.ioansen.java.labs.ShopEx;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Shop {
 
@@ -15,6 +17,14 @@ public class Shop {
 
     public String getName() {
         return name;
+    }
+
+    public List<Product> getProducts() {
+        return Collections.unmodifiableList(products);
+    }
+
+    public int getProductsCount(){
+        return products.size();
     }
 
     /**Adds a new product to this shop
@@ -63,5 +73,18 @@ public class Shop {
             value += p.getValue();
         }
         return value;
+    }
+
+    /*package private
+     * this is for testing purposes*/
+    Shop generateShop(String name){
+        Shop s = new Shop(name);
+        ThreadLocalRandom r = ThreadLocalRandom.current();
+        int n = r.nextInt(10);
+        for (int i = 0; i < 10 ; i++){
+            s.addProduct(Product.generateProduct());
+        }
+        System.out.println("Generated shop: " + s);
+        return s;
     }
 }

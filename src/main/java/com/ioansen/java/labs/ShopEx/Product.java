@@ -1,5 +1,10 @@
 package com.ioansen.java.labs.ShopEx;
 
+import com.ioansen.java.labs.util.Generator;
+
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Product {
 
     private final String name;
@@ -41,5 +46,15 @@ public class Product {
      * @return the result(price * stock)*/
     public double getValue(){
         return price * stock;
+    }
+
+
+    /*package private
+    * this is for testing purposes*/
+    static Product generateProduct(){
+        ThreadLocalRandom r = ThreadLocalRandom.current();
+        Product p =  new Product(Generator.randomString(r.nextInt(10)), r.nextDouble(0,50),r.nextInt(0,50));
+        System.out.println("Generated product: " + p);
+        return p;
     }
 }
