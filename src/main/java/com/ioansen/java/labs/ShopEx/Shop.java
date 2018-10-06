@@ -3,7 +3,6 @@ package com.ioansen.java.labs.ShopEx;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Shop {
 
@@ -19,6 +18,10 @@ public class Shop {
         return name;
     }
 
+    /**Returns an unmodifiable view of the products list
+     * Attempting to modify the list will throw UnsupportedOperationException
+     * @see UnsupportedOperationException
+     * @return an unmodifiable view of the products list*/
     public List<Product> getProducts() {
         return Collections.unmodifiableList(products);
     }
