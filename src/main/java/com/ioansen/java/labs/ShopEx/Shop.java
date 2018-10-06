@@ -74,17 +74,4 @@ public class Shop {
         }
         return value;
     }
-
-    /*package private
-     * this is for testing purposes*/
-    Shop generateShop(String name){
-        Shop s = new Shop(name);
-        ThreadLocalRandom r = ThreadLocalRandom.current();
-        int n = r.nextInt(10);
-        for (int i = 0; i < 10 ; i++){
-            s.addProduct(Product.generateProduct());
-        }
-        System.out.println("Generated shop: " + s);
-        return s;
-    }
 }
