@@ -20,7 +20,7 @@ public class Product {
         return price;
     }
 
-    public void setPrice(double price) {
+    void setPrice(double price) {
         this.price = price;
     }
 
@@ -28,7 +28,7 @@ public class Product {
         return stock;
     }
 
-    public void setStock(int amount) {
+    void setStock(int amount) {
         this.stock = amount;
     }
 
