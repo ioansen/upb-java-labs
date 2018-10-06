@@ -32,14 +32,14 @@ public class Shop {
 
     /**Adds a new product to this shop
      * @param product the product to add
-     * @throws IllegalArgumentException if the product is already in this shop*/
-    public void addProduct(Product product) throws IllegalArgumentException{
+     * @return true if the product was added or false if the product was already present */
+    public boolean addProduct(Product product){
         for (Product p : products){
             if (p.getName().equals(product.getName())){
-                throw new IllegalArgumentException("Product already on the list");
+                return false;
             }
         }
-        products.add(product);
+        return products.add(product);
     }
 
     /**Removes a product from this shop
@@ -69,7 +69,7 @@ public class Shop {
     /**Calculates the total value of this shop
      * by adding the values of its products
      * @see Product#getValue()
-     * @return the result of adding all products of this shop*/
+     * @return the result*/
     public double getValue(){
         double value = 0;
         for(Product p : products){
