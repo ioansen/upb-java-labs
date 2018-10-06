@@ -2,8 +2,8 @@ package com.ioansen.java;
 
 import java.util.Objects;
 
-/**A simple class that emulates the mathematical fraction
- * This class is immutable and thread-safe
+/**A simple class that emulates a fraction
+ * This class is immutable
 * */
 public class Fraction {
 
@@ -27,8 +27,8 @@ public class Fraction {
         return  denominator;
     }
 
-    /**Performs the addition of two fractions. This one
-     * and one given as param
+    /**Performs the addition of two fractions: this one
+     * and the one given as param
      *
      * @param other the fraction to add to this fraction
      * @return another fraction that represents the addition
@@ -40,7 +40,7 @@ public class Fraction {
         return new Fraction(num,denom);
     }
     /**Perform division of the denominator from the numerator
-     * @return the division result as double*/
+     * @return the division result*/
     public double toDecimal(){
         return this.numerator / this.denominator;
     }

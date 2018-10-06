@@ -38,7 +38,7 @@ public class Product {
     }
 
     /**Calculates price * stock
-     * @return the result(price * stock)*/
+     * @return the result*/
     public double getValue(){
         return price * stock;
     }
