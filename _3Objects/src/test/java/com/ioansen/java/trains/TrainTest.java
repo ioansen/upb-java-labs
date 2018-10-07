@@ -17,7 +17,7 @@ public class TrainTest {
         while (orig.getName().equals(dest.getName())) dest = Place.getRandom();
 
         Random rnd = ThreadLocalRandom.current();
-        int start = rnd.nextInt(24*60);
+        int start = rnd.nextInt(23*60);
         int end =  start + orig.timeTo(dest);
         Clock startc = Clock.from(start);
         Clock endc = Clock.from(end);

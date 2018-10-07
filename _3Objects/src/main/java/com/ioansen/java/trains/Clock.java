@@ -31,7 +31,7 @@ class Clock {
     public static Clock from(int minutes)
     {
         int hour = minutes/60;
-        while ( hour > 24 ) hour -= 24;
+        while ( hour > 23 ) hour -= 24;
         int minute = minutes % 60;
         return new Clock(hour, minute);
     }
