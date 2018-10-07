@@ -2,8 +2,8 @@ package com.ioansen.java.trains;
 
 public class Schedule {
 
-    private Clock departure;
-    private Clock arrival;
+    Clock departure;
+    Clock arrival;
 
 
     public Schedule(Clock dep, Clock arr)

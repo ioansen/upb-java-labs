@@ -2,8 +2,8 @@ package com.ioansen.java.trains;
 
 public class Route {
 
-    private String origin;
-    private String destination;
+    String origin;
+    String destination;
 
     public Route(String origin, String destination)
     {
