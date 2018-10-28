@@ -12,6 +12,6 @@ public interface Vagon extends Comparable<Vagon>{
 
     @Override
     default int compareTo(Vagon o){
-        return Integer.compare(getColete(), o.getColete()) * (-1);
+        return Integer.compare(o.getColete(), getColete());
     }
 }
