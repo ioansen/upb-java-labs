@@ -1,0 +1,65 @@
+We described in Section 2.2.3 on page 46 how final fields are used to define immutable values; indeed you
+can use final fields to define immutable objects. There is a common misconception that shared access to
+immutable objects does not require any synchronization because the state of the object never changes. This is
+a misconception in general because it relies on the assumption that a thread will be guaranteed to see the
+initialized state of the immutable object, and that need not be the case. The problem is that, while the shared
+object is immutable, the reference used to access the shared object is itself shared and often
+mutableconsequently, a correctly synchronized program must synchronize access to that shared reference, but
+often programs do not do this, because programmers do not recognize the need to do it. For example, suppose
+one thread creates a String object and stores a reference to it in a static field. A second thread then uses that
+reference to access the string. There is no guarantee, based on what we've discussed so far, that the values
+written by the first thread when constructing the string will be seen by the second thread when it accesses the
+string.
+The memory model defines the semantics for multithreaded programs and tells you what you need to do to
+correctly synchronize your programs. But additionally, you need safeguards that ensure that incorrectly
+synchronized programs cannot violate the integrity of the language, or the virtual machine implementation, or
+the security architecture that prevents sensitive APIs from being misusedsee "Security" on page 677. These
+safeguards come in the form of additional rules in the memory model covering the use of final fields.
+The first rule for final fields covers the situation we described with the shared string. Basically, the rule states
+that if a reference to an object is stored after the object has been constructed, then any thread that reads that
+reference is guaranteed to see initialized values for the object's final fields. Note that there is no guarantee
+concerning non-final fields of the object that are read without synchronization.
+The second rule expands on the first to apply transitively to objects reachable via final fields. There is little
+point being guaranteed to see a reference stored in a final field, if the fields of that object are not guaranteed to
+be seen. What the second rule states, in general terms, is that if you read a reference from a final field, then
+any non-final fields in the referenced object will have a value at least as recent as the value they had when the
+311
+311
+reference was written. For example, this means that if one thread constructs an object and uses methods on
+that object to set its state, then a second thread will see the state set by the first thread if the reference used to
+access the object was written to a final field after the state changes were made. Any final fields in such objects
+are covered by the first rule.
+To preserve the integrity of the system, classes must use final fields appropriately to protect sensitive data, if
+correct synchronization cannot be relied on. For this reason, the String class uses final fields internally so
+that String values are both immutable and guaranteed to be visible.
+14.10.3. The Happens-Before Relationship
+The description of synchronizations actions above is a simplification of the operation of the memory model.
+The use of synchronized blocks and methods and the use of volatile variables provide guarantees concerning
+the reading and writing of variables beyond the volatile variables themselves or the variables accessed within
+the synchronized block. These synchronization actions establish what is called a happens-before relationship
+and it is this relationship that determines what values can be returned by a read of a variable. The
+happens-before relationship is transitive, and a statement that occurs ahead of another in program order
+happens-before that second statement. This allows actions other than synchronization actions to become
+synchronized across threads. For example, if a non-volatile variable is written before a volatile variable, and
+in another thread the same volatile variable is read before reading the non-volatile variable, then the write of
+the non-volatile variable happens-before the read of that variable and so the read is guaranteed to return the
+value written. Consider the following:
+If the read of dataReady by thread-2 yields true, then the write of dataReady by thread-1
+happened-before that read. Since the write to data by thread-1 happens-before the write to dataReady by
+thread-1, it follows that it also happens-before the read of dataReady by thread-2, hence the read of data
+by thread-2. In short, if thread-2 sees dataReady is true then it is guaranteed to see the new Data object
+created by thread-1. This is true because dataReady is a volatile variable,[2] even though data is not itself
+a volatile variable.
+[2] The same would be true if dataReady were not volatile but instead had synchronized
+get and set methods.
+Finally, note that the actual execution order of instructions and memory accesses can be in any order as long
+as the actions of the thread appear to that thread as if program order were followed, and provided all values
+read are allowed for by the memory model. This allows the programmer to fully understand the semantics of
+the programs they write, and it allows compiler writers and virtual machine implementors to perform complex
+optimizations that a simpler memory model would not permit.
+This discussion gives you an idea of how the memory model interacts with multithreading. The full details of
+the memory model are beyond the scope of this book. Fortunately, if you pursue a straightforward locking
+312
+312
+strategy using the tools in this book, the subtleties of the memory model will work for you and your code will
+be fine.
