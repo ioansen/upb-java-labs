@@ -1,16 +1,19 @@
 package com.ioansen.java.treeset;
 
+import com.ioansen.java.slists.SListSet;
+
 import java.io.*;
 import java.util.Comparator;
+import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
 
-    public static TreeSet<String> printWords(String filename){
-        TreeSet<String> words = new TreeSet<>();
-        File file = new File(filename);
+
+    public static SortedSet<String> printWords(String filename){
+        SortedSet<String> fillWords = new SListSet<>();
 
         Pattern pattern = Pattern.compile("[\\w']+");
         Matcher matcher;
@@ -22,34 +25,30 @@ public class Main {
             while((line = bf.readLine()) != null){
                 matcher = pattern.matcher(line);
                 while (matcher.find()){
-                    words.add(matcher.group());
+                    fillWords.add(matcher.group());
                 }
             }
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        return words;
+        return fillWords;
     }
 
-    public static TreeSet<String> printWordsComparator(TreeSet<String> words){
-
-        TreeSet<String> sameWords = new TreeSet<>(new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                return o2.compareTo(o1);
-            }
-        });
-        sameWords.addAll(words);
-        return sameWords;
-    }
 
     public static void main(String[] args){
-        TreeSet<String> words = printWords(Main.class.getClassLoader().getResource("words.in").getFile());
-        TreeSet<String> sameWords = printWordsComparator(words);
+        SortedSet<String> words = printWords(Main.class.getClassLoader().getResource("words.in").getFile());
+
+        Comparator<String> comparator = Comparator.reverseOrder();
+
+        SortedSet<String> sameTreeWords = new TreeSet<>(comparator);
+        sameTreeWords.addAll(words);
+        SortedSet<String> sameSListWords = new SListSet<>(comparator);
+        sameSListWords.addAll(words);
 
         System.out.println(words);
-        System.out.println(sameWords);
+        System.out.println(sameTreeWords);
+        System.out.println(sameSListWords);
 
     }
 }
