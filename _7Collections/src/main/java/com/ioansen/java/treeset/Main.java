@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class Main {
 
 
-    public static SortedSet<String> printWords(String filename){
+    public static SortedSet<String> getWords(String filename){
         SortedSet<String> fillWords = new SListSet<>();
 
         Pattern pattern = Pattern.compile("[\\w']+");
@@ -37,7 +37,7 @@ public class Main {
 
 
     public static void main(String[] args){
-        SortedSet<String> words = printWords(Main.class.getClassLoader().getResource("words.in").getFile());
+        SortedSet<String> words = getWords(Main.class.getClassLoader().getResource("words.in").getFile());
 
         Comparator<String> comparator = Comparator.reverseOrder();
 
